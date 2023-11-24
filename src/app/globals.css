@@ -95,14 +95,3 @@ body {
 body {
   background-color: var(--bg-default);
 }
-
-/* Toats Custom */
-.toast-error {
-  border-radius: 0.5rem;
-  border: 1px solid rgba(255, 0, 0, 0.8);
-}
-
-.toast-sucess {
-  border-radius: 0.5rem;
-  border: 1px solid rgba(19, 170, 19, 0.8);
-}
