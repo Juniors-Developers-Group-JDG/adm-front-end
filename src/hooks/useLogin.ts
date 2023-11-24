@@ -1,30 +1,37 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { FormProps } from '../types/login'
 import { useForm } from 'react-hook-form'
-import { schemaForm } from '../zod/loginSchema'
+import { FormProps, schemaForm } from '../zod/loginSchema'
+import { useToasts } from './useToast'
 
 export const useLogin = () => {
   const {
     handleSubmit,
     register,
+    reset,
     formState: { errors },
   } = useForm<FormProps>({
-    criteriaMode: 'all',
     mode: 'all',
+    reValidateMode: 'onChange',
     resolver: zodResolver(schemaForm),
-    defaultValues: {
-      email: '',
-      password: '',
-    },
   })
+  const { addToast } = useToasts()
 
   const handleFormSubmit = (data: FormProps) => {
     console.log(data)
+    addToast({
+      title: 'Sucesso!',
+      type: 'success',
+      durationInMs: 3000,
+      closeButton: true,
+      content: 'Login realizado com sucesso!',
+    })
+    reset()
   }
 
   return {
     errors,
     register,
+    reset,
     handleSubmit,
     handleFormSubmit,
   }

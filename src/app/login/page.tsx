@@ -9,21 +9,22 @@ import {
   HiOutlineLockClosed,
 } from 'react-icons/hi2'
 import { HiOutlineEyeOff } from 'react-icons/hi'
+import { useToasts } from '@/hooks/useToast'
 
 export default function Login() {
-  const [showPassword, setShowPasswod] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
 
   const { errors, handleSubmit, handleFormSubmit, register } = useLogin()
 
   const togglePasswordVisibility = () => {
-    setShowPasswod((prev) => !prev)
+    setShowPassword((prev) => !prev)
   }
 
   return (
     <main className="flex h-screen w-full items-center justify-center bg-primary-700">
       <form
         onSubmit={handleSubmit(handleFormSubmit)}
-        className="flex w-full max-w-2xl flex-col justify-center gap-4"
+        className="flex max-w-sm flex-col justify-center gap-4 md:w-full md:max-w-2xl"
       >
         <TextInput
           label="Email"

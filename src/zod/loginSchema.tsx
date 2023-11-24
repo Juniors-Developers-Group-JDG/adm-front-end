@@ -9,3 +9,5 @@ export const schemaForm = z
     email: field.email,
     password: field.password,
   }))
+
+export type FormProps = Zod.infer<typeof schemaForm>
