@@ -42,7 +42,7 @@ a{
 }
 
 html {
-  @apply h-full !scroll-smooth;
+  @apply h-full !scroll-smooth bg-primary-700;
   scroll-behavior: smooth;
   -webkit-tap-highlight-color: transparent;
 }
