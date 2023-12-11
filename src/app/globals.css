@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --bg-default: #222223;
+  --bg-default: #111315;
   --scrollbar-track: #00EBF0;
   --scrollbar-thumb: #222223;
 }

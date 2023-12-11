@@ -5,12 +5,16 @@ import SidebarMobile from '../shared/SidebarMobile'
 
 interface TopbarProps {
   sectionName: string
+  isOpen: boolean
 }
 
-export default function Topbar({ sectionName }: TopbarProps) {
+export default function Topbar({ sectionName, isOpen }: TopbarProps) {
   const [expandSidebar, setExpandSidebar] = useState(false)
   return (
-    <header className="flex w-full items-center gap-3 border-b border-b-primary-400 bg-primary-700 p-4 text-zinc-50 sm:p-10 md:h-[146px]">
+    <header
+      className={`flex w-full items-center gap-3 border-b border-b-primary-400 bg-primary-700 p-4 text-zinc-50 sm:p-10 md:h-[146px] ${isOpen ? 'ml-[275px]' : 'ml-[122px]'
+        }`}
+    >
       <Bars3Icon
         width={25}
         height={25}

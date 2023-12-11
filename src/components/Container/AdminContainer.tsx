@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import Sidebar from '../Sidebar'
 import Topbar from '../Topbar'
 
@@ -12,14 +13,13 @@ export default function AdminContainer({
   children,
   sectionName,
 }: AdminContainerProps) {
+  const [isExpandedSidebar, setIsExpandedSidebar] = useState(true)
   return (
-    <div className="flex">
-      <Sidebar />
+    <div className="flex w-full">
+      <Sidebar isOpen={isExpandedSidebar} setIsOpen={setIsExpandedSidebar} />
       <section className="w-full">
-        <Topbar sectionName={sectionName} />
-        <main className="h-full bg-primary-700 p-8 text-zinc-50">
-          {children}
-        </main>
+        <Topbar isOpen={isExpandedSidebar} sectionName={sectionName} />
+        <main className="h-full p-8 text-zinc-50">{children}</main>
       </section>
     </div>
   )
