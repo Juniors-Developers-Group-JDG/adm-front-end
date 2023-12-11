@@ -4,40 +4,47 @@
 
 :root {
   --bg-default: #111315;
-  --scrollbar-track: #00EBF0;
+  --scrollbar-track: #00ebf0;
   --scrollbar-thumb: #222223;
 }
 
-*{
-  margin:0;
-  padding:0;
+* {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
-::-webkit-scrollbar{
+::-webkit-scrollbar {
   width: 3px;
 }
 
-::-webkit-scrollbar-track{
+::-webkit-scrollbar-track {
   background-color: var(--scrollbar-thumb);
 }
 
-::-webkit-scrollbar-thumb{
+::-webkit-scrollbar-thumb {
   background: var(--scrollbar-track);
 }
 
-h1, h2, h3, h4, h5, h6, p{
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
   margin: 0;
   padding: 0;
 }
 
-ul, li{
+ul,
+li {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-a{
+a {
   text-decoration: none;
 }
 
@@ -54,36 +61,36 @@ body {
 
 @layer components {
   .container {
-    @apply sm:max-w-[768px] md:max-w-[1536px] md:max-h-[864px];
+    @apply sm:max-w-[768px] md:max-h-[864px] md:max-w-[1536px];
   }
 }
 
-@layer utilities{
-  .bg-gradient-center{
+@layer utilities {
+  .bg-gradient-center {
     background: radial-gradient(
       circle,
-      rgba(25,46,75,1) 0%,
-      rgba(34,34,35,1) 32%
+      rgba(25, 46, 75, 1) 0%,
+      rgba(34, 34, 35, 1) 32%
     );
   }
 
   .bg-gradient-btn {
     background: linear-gradient(
-      0deg, 
-      rgba(0, 235, 240, 0.19), 
+      0deg,
+      rgba(0, 235, 240, 0.19),
       rgba(0, 235, 240, 0.19)
-      );
-    }
-  }
-
-  .bg-gradient-footer{
-    background: radial-gradient(
-    49.05% 51.14% at 50.08% 51.38%, 
-    rgba(87, 144, 255, 0.14) 0%, 
-    rgba(75, 146, 233, 0.082171) 41.31%, 
-    rgba(58, 149, 201, 0) 100%
     );
   }
+}
+
+.bg-gradient-footer {
+  background: radial-gradient(
+    49.05% 51.14% at 50.08% 51.38%,
+    rgba(87, 144, 255, 0.14) 0%,
+    rgba(75, 146, 233, 0.082171) 41.31%,
+    rgba(58, 149, 201, 0) 100%
+  );
+}
 
 body {
   background-color: var(--bg-default);
