@@ -6,6 +6,7 @@ type BadgeStackProps = {
   size?: 'default' | 'sm'
   showDeleteButton?: boolean
   onDeleteClick?: () => void
+  width?: 'fit' | 'full'
 }
 
 const BadgeStack = ({
@@ -13,6 +14,7 @@ const BadgeStack = ({
   size = 'default',
   showDeleteButton = false,
   onDeleteClick,
+  width = 'full',
 }: BadgeStackProps) => {
   const defaultClasses =
     'flex items-center justify-center gap-2.5 px-2 py-2 rounded-lg text-primary-900 bg-[#262626]'
@@ -26,8 +28,17 @@ const BadgeStack = ({
     }
   }
 
+  const getWidthClass = () => {
+    switch (width) {
+      case 'fit':
+        return 'w-fit'
+      default:
+        return 'w-full'
+    }
+  }
+
   return (
-    <span className={`${defaultClasses} ${getSizeClass()}`}>
+    <span className={`${defaultClasses} ${getSizeClass()} ${getWidthClass()}`}>
       {title}
       {showDeleteButton && (
         <button onClick={onDeleteClick}>
