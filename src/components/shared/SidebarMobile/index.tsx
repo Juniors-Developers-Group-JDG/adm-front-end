@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React, { useRef } from 'react'
 import JDGMobile from '@/assets/jdg-mobile.png'
 import {
   UserIcon,
@@ -10,17 +10,23 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import SidebarItem from '@/components/Sidebar/SidebarItem'
 import { menu } from '@/components/Sidebar/menu'
+import useOutsideClick from '@/hooks/useOutsideClick'
 
 interface SidebarProps {
   isExpanded: boolean
+  onClose: () => void
 }
 
-export default function SidebarMobile({ isExpanded }: SidebarProps) {
+export default function SidebarMobile({ isExpanded, onClose }: SidebarProps) {
+  const ref = useRef(null)
   const pathname = usePathname()
   const iconSize = 24
 
+  useOutsideClick(ref, onClose)
+
   return (
     <aside
+      ref={ref}
       className={`absolute left-0 top-0 z-50 flex-col border-r border-r-primary-400 bg-primary-700 px-4 py-10 transition-all duration-500 ease-in-out sm:hidden ${isExpanded ? 'w-[200px]' : 'w-[122px] items-center'
         }`}
     >
@@ -36,18 +42,19 @@ export default function SidebarMobile({ isExpanded }: SidebarProps) {
       </figure>
       <p className="mb-8 px-4 font-medium uppercase text-[#8b8b8b]">Menu</p>
       <ul
-        className={`flex flex-col space-y-6 
+        className={`flex flex-col space-y-3 
         ${isExpanded ? 'items-start' : 'items-center'}`}
       >
         {menu.map((item) => (
           <SidebarItem key={item.id} item={item} isExpanded={isExpanded} />
         ))}
       </ul>
-      <ul className="mb-10 mt-[78px]">
+      <ul className="mb-10 mt-[40px]">
         <Link
           href={'/admin/user'}
           className={`mb-4 flex items-center gap-4 p-4 text-sm
-            ${pathname === '/admin/user'
+            ${
+            pathname === '/admin/user'
               ? 'rounded-lg bg-[#232323] font-bold text-primary-900'
               : 'text-zinc-50'
             }
