@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React, { Dispatch, SetStateAction } from 'react'
 import JDGMobile from '@/assets/jdg-mobile.png'
 import {
   UserIcon,
@@ -13,21 +13,25 @@ import { usePathname } from 'next/navigation'
 import { menu } from './menu'
 import SidebarItem from './SidebarItem'
 
-export default function Sidebar() {
+interface SidebarProps {
+  isOpen: boolean
+  setIsOpen: Dispatch<SetStateAction<boolean>>
+}
+
+export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
   const pathname = usePathname()
-  const [isExpanded, setIsExpanded] = useState(false)
   const iconSize = 24
 
   return (
     <aside
-      className={`hidden flex-col border-r border-r-primary-400 bg-primary-700 px-4 py-10 transition-all duration-500 ease-in-out sm:sticky sm:flex ${isExpanded ? 'w-[275px]' : 'w-[122px] items-center'
+      className={`fixed hidden min-h-screen flex-col border-r border-r-primary-400 bg-primary-700 px-4 py-10 transition-all duration-500 ease-in-out sm:flex sm:h-screen ${isOpen ? 'w-[275px]' : 'w-[122px] items-center'
         }`}
     >
       <span
-        onClick={() => setIsExpanded(!isExpanded)}
+        onClick={() => setIsOpen(!isOpen)}
         className="absolute -right-4 top-14 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-[#22252a]"
       >
-        {isExpanded ? (
+        {isOpen ? (
           <ChevronLeftIcon color="#ffffff" width={16} height={16} />
         ) : (
           <ChevronRightIcon color="#ffffff" width={16} height={16} />
@@ -37,7 +41,7 @@ export default function Sidebar() {
         <Image alt="Jdg mobile logo" width={70} height={70} src={JDGMobile} />
         <p
           style={{ transition: 'opacity 0.5s ease-in-out' }}
-          className={`text-center text-xs font-bold text-zinc-50 transition-all duration-700 ease-in-out ${isExpanded ? 'block' : 'hidden'
+          className={`text-center text-xs font-bold text-zinc-50 transition-all duration-700 ease-in-out ${isOpen ? 'block' : 'hidden'
             }`}
         >
           Juniors Developers Group
@@ -46,16 +50,16 @@ export default function Sidebar() {
       <p className="mb-8 px-4 font-medium uppercase text-[#8b8b8b]">Menu</p>
       <ul
         className={`flex flex-col space-y-6 
-        ${isExpanded ? 'items-start' : 'items-center'}`}
+        ${isOpen ? 'items-start' : 'items-center'}`}
       >
         {menu.map((item) => (
-          <SidebarItem key={item.id} item={item} isExpanded={isExpanded} />
+          <SidebarItem key={item.id} item={item} isExpanded={isOpen} />
         ))}
       </ul>
-      <ul className="mb-10 mt-[78px]">
+      <ul className="mb-10 mt-[50px]">
         <Link
           href={'/admin/user'}
-          className={`mb-4 flex items-center gap-4 p-4 text-sm
+          className={`mb-2 flex items-center gap-4 p-4 text-sm
             ${pathname === '/admin/user'
               ? 'rounded-lg bg-[#232323] font-bold text-primary-900'
               : 'text-zinc-50'
@@ -63,11 +67,11 @@ export default function Sidebar() {
             `}
         >
           <UserIcon width={iconSize} height={iconSize} />
-          {isExpanded && <p>Admin</p>}
+          {isOpen && <p>Admin</p>}
         </Link>
         <span className="mb-10 flex items-center gap-4 p-4 text-sm text-zinc-50">
           <ArrowRightOnRectangleIcon width={iconSize} height={iconSize} />
-          {isExpanded && <p>Sair</p>}
+          {isOpen && <p>Sair</p>}
         </span>
       </ul>
     </aside>
